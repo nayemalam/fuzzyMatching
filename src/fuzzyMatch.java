@@ -5,6 +5,8 @@ public class fuzzyMatch {
         String s1 = "sitting";
         String s2 = "kitten";
         System.out.println("FuzzyMatching using edit distance: "+FuzzyWithEditDistance(s1, s2) + ", with edit distance of: " +editDistance(s1,s2));
+
+        diceCoefficient(s1,s2,2.0,2);
     }
 
     public static Double diceCoefficient(String string1, String string2, Double spaceScore, int numberOfGram) {
@@ -18,6 +20,13 @@ public class fuzzyMatch {
         // add a weight to a spacing -> 1 space could be like 5-10%
         // assign a position value
         if (spaceScore > 0.0) {
+            // normalize everything
+            name1 = name1.toLowerCase().trim().replaceAll(" +", " ");
+            name2 = name2.toLowerCase().trim().replaceAll(" +", " ");
+
+            // set number of ngrams
+            // -- bigram
+
 
         }
 

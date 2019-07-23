@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="971794d9-a351-4a7a-9014-9f296f2a79eb" name="Default Changelist" comment="" />
+    <list default="true" id="971794d9-a351-4a7a-9014-9f296f2a79eb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/fuzzyMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fuzzyMatch.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fuzzyMatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="586">
+              <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
               <folding>
                 <element signature="e#3082#3083#0" expanded="true" />
                 <element signature="e#3131#3132#0" expanded="true" />
@@ -66,6 +69,9 @@
         </subPane>
       </pane>
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -141,7 +147,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/fuzzyMatch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="586">
+          <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
           <folding>
             <element signature="e#3082#3083#0" expanded="true" />
             <element signature="e#3131#3132#0" expanded="true" />
