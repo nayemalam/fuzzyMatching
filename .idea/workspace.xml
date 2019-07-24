@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="971794d9-a351-4a7a-9014-9f296f2a79eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/fuzzyMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fuzzyMatch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fuzzyMatching.iml" beforeDir="false" afterPath="$PROJECT_DIR$/fuzzyMatching.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fuzzyMatching/fuzzify.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fuzzyMatching/fuzzyMatch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fuzzify.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fuzzyMatch.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,14 +26,25 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/fuzzyMatch.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+            <state relative-caret-position="192">
+              <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
               <folding>
-                <element signature="e#3082#3083#0" expanded="true" />
-                <element signature="e#3131#3132#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2030#2038#0" expanded="true" />
+                <element signature="e#2701#2709#0" expanded="true" />
+                <element signature="e#6807#6808#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -38,6 +58,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/fuzzyMatch.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/fuzzyMatch.java" />
       </list>
     </option>
   </component>
@@ -63,6 +85,19 @@
               <item name="fuzzyMatching" type="b2602c69:ProjectViewProjectNode" />
               <item name="fuzzyMatching" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fuzzyMatching" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fuzzyMatching" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fuzzyMatching" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fuzzyMatching" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -126,7 +161,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Messages" weight="0.32987553" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28630707" />
@@ -145,13 +180,33 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/fuzzyMatch.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+        <state relative-caret-position="189">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="2131" column="19" selection-start-line="2131" selection-start-column="19" selection-end-line="2131" selection-end-column="19" />
           <folding>
-            <element signature="e#3082#3083#0" expanded="true" />
-            <element signature="e#3131#3132#0" expanded="true" />
+            <element signature="e#83968#83969#0" expanded="true" />
+            <element signature="e#84017#84018#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2030#2038#0" expanded="true" />
+            <element signature="e#2701#2709#0" expanded="true" />
+            <element signature="e#6807#6808#0" expanded="true" />
           </folding>
         </state>
       </provider>
