@@ -1,2 +1,2 @@
-# fuzzyMatching
-with edit distance and using dice coefficient
+# fuzzyMatching 
+using Levenshtein Edit Distance and Sørensen Dice Coefficient
