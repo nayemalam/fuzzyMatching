@@ -20,22 +20,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+            <state relative-caret-position="520">
+              <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2047#2055#0" expanded="true" />
                 <element signature="e#2099#2107#0" expanded="true" />
                 <element signature="e#2640#2648#0" expanded="true" />
                 <element signature="e#3115#3123#0" expanded="true" />
-                <element signature="method#nGramofManyWords#0;class#fuzzyMatch#0" />
                 <element signature="e#3131#3139#0" expanded="true" />
                 <element signature="method#concat#0;class#fuzzyMatch#0" />
                 <element signature="e#4532#4540#0" expanded="true" />
                 <element signature="method#biGram#0;class#fuzzyMatch#0" />
                 <element signature="method#editDistance#0;class#fuzzyMatch#0" />
                 <element signature="e#7304#7354#1" />
-                <element signature="e#8069#8070#0" expanded="true" />
+                <element signature="e#8569#8570#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,6 +50,11 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>dice</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -215,22 +219,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+        <state relative-caret-position="520">
+          <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2047#2055#0" expanded="true" />
             <element signature="e#2099#2107#0" expanded="true" />
             <element signature="e#2640#2648#0" expanded="true" />
             <element signature="e#3115#3123#0" expanded="true" />
-            <element signature="method#nGramofManyWords#0;class#fuzzyMatch#0" />
             <element signature="e#3131#3139#0" expanded="true" />
             <element signature="method#concat#0;class#fuzzyMatch#0" />
             <element signature="e#4532#4540#0" expanded="true" />
             <element signature="method#biGram#0;class#fuzzyMatch#0" />
             <element signature="method#editDistance#0;class#fuzzyMatch#0" />
             <element signature="e#7304#7354#1" />
-            <element signature="e#8069#8070#0" expanded="true" />
+            <element signature="e#8569#8570#0" expanded="true" />
           </folding>
         </state>
       </provider>

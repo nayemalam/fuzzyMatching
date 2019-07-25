@@ -1,5 +1,7 @@
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class fuzzyMatch {
 
@@ -21,9 +23,9 @@ public class fuzzyMatch {
     }
 
     public static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGram) {
-        String name1 = "this is my car";
+        String name1 = "Hello the cat jumped over";
         String name2 = "The, quick brown fo.x jumped! Yes? Indeed( )";
-        String name3 = "this is my dog yo";
+        String name3 = "Hello the dog jumped over";
         String name4 = "   Donald    Trump    ";
         String name5 = "Trump Donald";
 
@@ -33,8 +35,8 @@ public class fuzzyMatch {
         name3 = name3.toLowerCase().trim().replaceAll(" +", " ");
 
         // implements the Sørensen Dice Coefficient
-        ArrayList<String> ngram1 = nGram(1, name1);
-        ArrayList<String> ngram2 = nGram(1, name3);
+        ArrayList<String> ngram1 = nGram(2, name1);
+        ArrayList<String> ngram2 = nGram(2, name3);
 
         Set<String> set1 = new HashSet<String>();
         Set<String> set2 = new HashSet<String>();
@@ -49,7 +51,7 @@ public class fuzzyMatch {
         Set<String> intersection = new HashSet<String>(set1);
         intersection.retainAll(set2);
         double t = intersection.size();
-        System.out.println(t);
+        System.out.println("Common terms: " +t);
 
         System.out.println("The Dice Coefficient is: " +diceFunction(t, 0.0, set1.size(), set2.size()));
 
@@ -72,8 +74,8 @@ public class fuzzyMatch {
             }
         }
         System.out.println("The number of spaces: " +numberOfSpaces);
-        // handle any other use cases
         if(numberOfSpaces > 0) {
+            // handle any other use cases
             if (str.contains(",") || str.contains("!") || str.contains("?") || str.contains("(") || str.contains(")") || str.contains(".")) {
                 str = str.trim().replaceAll("[^a-zA-Z ]", "");
 //            System.out.println(str);
@@ -91,13 +93,16 @@ public class fuzzyMatch {
     }
 
     private static ArrayList<String> nGramofManyWords(int n, String str) {
-        ArrayList<String> ngrams = new ArrayList<String>();
+        ArrayList<String> words = new ArrayList<String>();
         // split sentence into array of substrings
-        String[] words = str.split(" ");
-        for(int i=0; i<words.length-n +1; i++) {
-            ngrams.add(concat(words, i,i+n));
+        String[] split = str.split(" ");
+        if(n > split.length) {
+            System.out.println("nGrams chosen is larger than the word length. Hint: word length = " +split.length);
         }
-        return ngrams;
+        for(int i=0; i<split.length-n +1; i++) {
+            words.add(concat(split, i,i+n));
+        }
+        return words;
     }
 
     private static String concat(String[] words, int start, int end) {
@@ -116,12 +121,12 @@ public class fuzzyMatch {
 //        String[] result = new String[str.length() -1];
         ArrayList<String> result = new ArrayList<String>();
         if (n>str.length()) {
-            System.out.print("nGrams chosen is larger than the word length. Hint: word length = " +str.length());
+            System.out.println("nGrams chosen is larger than the word length. Hint: word length = " +str.length());
         } else {
 //            System.out.println("\nThe " + n + "Gram of: '" + str + "':");
             for (int i = 0; i <= str.length() - n; i++) {
                 if (n == 1) {
-                    result.add(str);
+                    result.add(Character.toString(str.charAt(i)));
 //                    System.out.print("'" + str.charAt(i) + "' ");
                 } else {
                     result.add(str.substring(i,i+n));
@@ -132,6 +137,13 @@ public class fuzzyMatch {
 //            System.out.println("\n-> cardinality: " + result.length);
         }
         return result;
+    }
+
+    // another string similarity matching
+    private static Double jaccardIndex(double t, int stringLength1, int stringLength2) {
+        double J;
+        J = t/(stringLength1+stringLength2);
+        return J;
     }
 
     private static void biGram(String str) {
