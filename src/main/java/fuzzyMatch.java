@@ -1,6 +1,4 @@
-import java.lang.Object;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class fuzzyMatch {
 
@@ -21,22 +19,16 @@ public class fuzzyMatch {
     }
 
     public static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGram) {
-        String name1 = "night";
+        String name1 = "foobar";
         String name2 = "The, quick brown fo.x jumped! Yes? Indeed( )";
-        String name3 = "nacht";
+        String name3 = "fubar";
         String name4 = "   Donald    Trump    ";
         String name5 = "Trump Donald";
 
-        // == logic maybe ==
-        // get nGram of a word
-        // assign string 1 to be that word
-        // get nGram of another word
-        // assign string 2 to be that word
-        // find the common items in both strings
-        // compute dice
-
         // need to have spaceScore > 0 to then do the matching
         // assign a position value
+
+        // how to assign a value to spaceScore and how does program know if string contains spaces or not??
         if (spaceScore > 0.0) {
             // normalize everything
             name1 = name1.toLowerCase().trim().replaceAll(" +", " ");
@@ -44,12 +36,37 @@ public class fuzzyMatch {
             name3 = name3.toLowerCase().trim().replaceAll(" +", " ");
 
             // implements the Sørensen Dice Coefficient
-            nGram(2, name1);
-            nGram(2, name3);
+//            nGram(2, name2);
+            String[] ngram1 = nGramOfOneWord(2, name1);
+            String[] ngram2 = nGramOfOneWord(2, name3);
 
+            Set<String> set1 = new HashSet<String>();
+            Set<String> set2 = new HashSet<String>();
+            for(String token : ngram1) {
+                set1.addAll(Collections.singletonList(token));
+            }
+            for(String token : ngram2) {
+                set2.addAll(Collections.singletonList(token));
+            }
+
+            Set<String> intersection = new HashSet<String>(set1);
+            intersection.retainAll(set2);
+            double t = intersection.size();
+            System.out.println(t);
+
+            System.out.println("The Dice Coefficient is: " +diceFunction(t, set1.size(), set2.size()));
+        } else {
+            // can do nGram of one word right here
+            System.out.println("No spaces");
         }
 
         return 0.0;
+    }
+
+    private static Double diceFunction(double t, int stringLength1, int stringLength2) {
+        double result;
+        result = (2*t)/(double)(stringLength1 + stringLength2);
+        return result;
     }
 
     private static void nGram(int n, String str) {
@@ -91,22 +108,23 @@ public class fuzzyMatch {
         return sb.toString();
     }
 
-    private static void nGramOfOneWord(int n, String str) {
+    private static String[] nGramOfOneWord(int n, String str) {
         String[] result = new String[str.length() -1];
         if (n>str.length()) {
             System.out.print("nGrams chosen is larger than the word length. Hint: word length = " +str.length());
         } else {
-            System.out.println("\nThe " + n + "Gram of: '" + str + "':");
+//            System.out.println("\nThe " + n + "Gram of: '" + str + "':");
             for (int i = 0; i <= str.length() - n; i++) {
                 if (n == 1) {
-                    System.out.print("'" + str.charAt(i) + "' ");
+//                    System.out.print("'" + str.charAt(i) + "' ");
                 } else {
                     result[i] = str.substring(i, i + n);
-                    System.out.print("'" + result[i].trim().replaceAll(" +", " ") + "' ");
+//                    System.out.print("'" + result[i].trim().replaceAll(" +", " ") + "' ");
                 }
             }
-            System.out.println("\n-> cardinality: " + result.length);
+//            System.out.println("\n-> cardinality: " + result.length);
         }
+        return result;
     }
 
     private static void biGram(String str) {
