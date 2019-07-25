@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class fuzzyMatch {
@@ -13,77 +14,80 @@ public class fuzzyMatch {
         } else {
             System.out.println("The similarity between (" + s1 + ", " + s2 + ") is: " + FuzzyWithEditDistance(s1, s2) + ", using edit distance of: " + editDistance(s1, s2));
         }
+        // the similarity between, with common dice terms of:
 
         // with Dice coefficient
-        FuzzyWithDiceCoefficient(s1,s2,2.0,2);
+        FuzzyWithDiceCoefficient(s1,s2,1.0,2);
     }
 
     public static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGram) {
-        String name1 = "foobar";
+        String name1 = "this is my car";
         String name2 = "The, quick brown fo.x jumped! Yes? Indeed( )";
-        String name3 = "fubar";
+        String name3 = "this is my dog yo";
         String name4 = "   Donald    Trump    ";
         String name5 = "Trump Donald";
 
-        // need to have spaceScore > 0 to then do the matching
-        // assign a position value
+        // normalize everything
+        name1 = name1.toLowerCase().trim().replaceAll(" +", " ");
+        name2 = name2.toLowerCase().trim().replaceAll(" +", " ");
+        name3 = name3.toLowerCase().trim().replaceAll(" +", " ");
 
-        // how to assign a value to spaceScore and how does program know if string contains spaces or not??
-        if (spaceScore > 0.0) {
-            // normalize everything
-            name1 = name1.toLowerCase().trim().replaceAll(" +", " ");
-            name2 = name2.toLowerCase().trim().replaceAll(" +", " ");
-            name3 = name3.toLowerCase().trim().replaceAll(" +", " ");
+        // implements the Sørensen Dice Coefficient
+        ArrayList<String> ngram1 = nGram(1, name1);
+        ArrayList<String> ngram2 = nGram(1, name3);
 
-            // implements the Sørensen Dice Coefficient
-//            nGram(2, name2);
-            String[] ngram1 = nGramOfOneWord(2, name1);
-            String[] ngram2 = nGramOfOneWord(2, name3);
-
-            Set<String> set1 = new HashSet<String>();
-            Set<String> set2 = new HashSet<String>();
-            for(String token : ngram1) {
-                set1.addAll(Collections.singletonList(token));
-            }
-            for(String token : ngram2) {
-                set2.addAll(Collections.singletonList(token));
-            }
-
-            Set<String> intersection = new HashSet<String>(set1);
-            intersection.retainAll(set2);
-            double t = intersection.size();
-            System.out.println(t);
-
-            System.out.println("The Dice Coefficient is: " +diceFunction(t, set1.size(), set2.size()));
-        } else {
-            // can do nGram of one word right here
-            System.out.println("No spaces");
+        Set<String> set1 = new HashSet<String>();
+        Set<String> set2 = new HashSet<String>();
+        for(String token : ngram1) {
+            set1.addAll(Collections.singletonList(token));
         }
+        for(String token : ngram2) {
+            set2.addAll(Collections.singletonList(token));
+        }
+        System.out.println("First diced: "+set1 + "\nSecond diced: " +set2);
+
+        Set<String> intersection = new HashSet<String>(set1);
+        intersection.retainAll(set2);
+        double t = intersection.size();
+        System.out.println(t);
+
+        System.out.println("The Dice Coefficient is: " +diceFunction(t, 0.0, set1.size(), set2.size()));
 
         return 0.0;
     }
 
-    private static Double diceFunction(double t, int stringLength1, int stringLength2) {
+    private static Double diceFunction(double t, double spaceScore, int stringLength1, int stringLength2) {
         double result;
-        result = (2*t)/(double)(stringLength1 + stringLength2);
+        // users are able to initialize how much they'd like to score each space
+        result = (2*t)/(double)(stringLength1 + stringLength2) + spaceScore;
         return result;
     }
 
-    private static void nGram(int n, String str) {
-//        List<String> ngrams = new ArrayList<String>();
+    private static ArrayList<String> nGram(int n, String str) {
         ArrayList<String> ngrams = new ArrayList<String>();
-        String[] result = new String[str.length() -1];
+        int numberOfSpaces = 0;
+        for(char c : str.toCharArray()) {
+            if(c == ' ') {
+                numberOfSpaces++;
+            }
+        }
+        System.out.println("The number of spaces: " +numberOfSpaces);
         // handle any other use cases
-        if(str.contains(",") || str.contains("!") || str.contains("?") || str.contains("(") || str.contains(")") || str.contains(".")) {
-            str = str.trim().replaceAll("[^a-zA-Z ]", "");
+        if(numberOfSpaces > 0) {
+            if (str.contains(",") || str.contains("!") || str.contains("?") || str.contains("(") || str.contains(")") || str.contains(".")) {
+                str = str.trim().replaceAll("[^a-zA-Z ]", "");
 //            System.out.println(str);
-        }
-        // assign some weight ~ 10%
-        if(str.contains(" ")) {
-            System.out.print(nGramofManyWords(n, str));
+            }
+            if (str.contains(" ")) {
+//            System.out.print(nGramofManyWords(n, str));
+                ngrams = nGramofManyWords(n, str);
+//                System.out.println(ngrams);
+            }
         } else {
-            nGramOfOneWord(n, str);
+//            System.out.println("One of the given strings do not have any spaces");
+            ngrams = nGramOfOneWord(n, str);
         }
+        return ngrams;
     }
 
     private static ArrayList<String> nGramofManyWords(int n, String str) {
@@ -108,17 +112,20 @@ public class fuzzyMatch {
         return sb.toString();
     }
 
-    private static String[] nGramOfOneWord(int n, String str) {
-        String[] result = new String[str.length() -1];
+    private static ArrayList<String> nGramOfOneWord(int n, String str) {
+//        String[] result = new String[str.length() -1];
+        ArrayList<String> result = new ArrayList<String>();
         if (n>str.length()) {
             System.out.print("nGrams chosen is larger than the word length. Hint: word length = " +str.length());
         } else {
 //            System.out.println("\nThe " + n + "Gram of: '" + str + "':");
             for (int i = 0; i <= str.length() - n; i++) {
                 if (n == 1) {
+                    result.add(str);
 //                    System.out.print("'" + str.charAt(i) + "' ");
                 } else {
-                    result[i] = str.substring(i, i + n);
+                    result.add(str.substring(i,i+n));
+//                    result[i] = str.substring(i, i + n);
 //                    System.out.print("'" + result[i].trim().replaceAll(" +", " ") + "' ");
                 }
             }
@@ -140,6 +147,7 @@ public class fuzzyMatch {
 
 
     private static Double FuzzyWithEditDistance(String string1, String string2) {
+        double result = 0.0;
         // ensure we are dividing by the longest length
         String longestString = string1;
         String shortestString = string2;
@@ -150,7 +158,7 @@ public class fuzzyMatch {
         if(longestString.length() == 0) {
             System.out.print("Please enter a string.");
         }
-        double result = ((longestString.length()-editDistance(longestString, shortestString)) / (double) longestString.length());
+        result = ((longestString.length()-editDistance(longestString, shortestString)) / (double) longestString.length());
         return result;
     }
 
