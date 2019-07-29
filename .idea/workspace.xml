@@ -20,21 +20,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+            <state relative-caret-position="251">
+              <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2047#2055#0" expanded="true" />
                 <element signature="e#2099#2107#0" expanded="true" />
                 <element signature="e#2640#2648#0" expanded="true" />
+                <element signature="method#diceFunction#0;class#fuzzyMatch#0" />
                 <element signature="e#3115#3123#0" expanded="true" />
                 <element signature="e#3131#3139#0" expanded="true" />
-                <element signature="method#concat#0;class#fuzzyMatch#0" />
                 <element signature="e#4532#4540#0" expanded="true" />
-                <element signature="method#biGram#0;class#fuzzyMatch#0" />
                 <element signature="method#editDistance#0;class#fuzzyMatch#0" />
+                <element signature="method#jaccardIndex#0;class#fuzzyMatch#0" />
+                <element signature="method#biGram#0;class#fuzzyMatch#0" />
                 <element signature="e#7304#7354#1" />
-                <element signature="e#8569#8570#0" expanded="true" />
+                <element signature="e#9222#9223#0" expanded="true" />
+                <element signature="method#append#0;class#fuzzyMatch#0" />
               </folding>
             </state>
           </provider>
@@ -112,6 +114,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -169,7 +174,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.32987553" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28630707" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29460582" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -219,21 +224,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+        <state relative-caret-position="251">
+          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2047#2055#0" expanded="true" />
             <element signature="e#2099#2107#0" expanded="true" />
             <element signature="e#2640#2648#0" expanded="true" />
+            <element signature="method#diceFunction#0;class#fuzzyMatch#0" />
             <element signature="e#3115#3123#0" expanded="true" />
             <element signature="e#3131#3139#0" expanded="true" />
-            <element signature="method#concat#0;class#fuzzyMatch#0" />
             <element signature="e#4532#4540#0" expanded="true" />
-            <element signature="method#biGram#0;class#fuzzyMatch#0" />
             <element signature="method#editDistance#0;class#fuzzyMatch#0" />
+            <element signature="method#jaccardIndex#0;class#fuzzyMatch#0" />
+            <element signature="method#biGram#0;class#fuzzyMatch#0" />
             <element signature="e#7304#7354#1" />
-            <element signature="e#8569#8570#0" expanded="true" />
+            <element signature="e#9222#9223#0" expanded="true" />
+            <element signature="method#append#0;class#fuzzyMatch#0" />
           </folding>
         </state>
       </provider>
@@ -241,9 +248,78 @@
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>fuzzyMatching</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

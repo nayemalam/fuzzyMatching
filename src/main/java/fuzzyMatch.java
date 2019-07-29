@@ -1,3 +1,5 @@
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,66 +12,78 @@ public class fuzzyMatch {
         String s1 = "Donald     Trump".toLowerCase().trim().replaceAll(" +", " ");
         String s2 = "    Truman      Donald".toLowerCase().trim().replaceAll(" +", " ");
 
-        // with Edit Distance
-        if(s1.length() > 25 || s2.length() >25) {
-            System.out.println("The similarity is: " +FuzzyWithEditDistance(s1, s2) + ", using edit distance of: " +editDistance(s1,s2));
-        } else {
-            System.out.println("The similarity between (" + s1 + ", " + s2 + ") is: " + FuzzyWithEditDistance(s1, s2) + ", using edit distance of: " + editDistance(s1, s2));
-        }
+        // with Edit Distancef
+        FuzzyWithEditDistance(s1,s2);
         // the similarity between, with common dice terms of:
 
         // with Dice coefficient
-        FuzzyWithDiceCoefficient(s1,s2,1.0,2);
+        FuzzyWithDiceCoefficient(s1,s2,0.0,2);
     }
 
-    public static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGram) {
-        String name1 = "Hello the cat jumped over";
+    private static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGram) {
+        String name1 = "night";
         String name2 = "The, quick brown fo.x jumped! Yes? Indeed( )";
-        String name3 = "Hello the dog jumped over";
+        String name3 = "nachtig";
         String name4 = "   Donald    Trump    ";
         String name5 = "Trump Donald";
+        double numberOfSpaces;
+        double result;
 
-        // normalize everything
-        name1 = name1.toLowerCase().trim().replaceAll(" +", " ");
-        name2 = name2.toLowerCase().trim().replaceAll(" +", " ");
-        name3 = name3.toLowerCase().trim().replaceAll(" +", " ");
+        if(name1 == null || name1.length() == 0 || name3 == null || name3.length() == 0) {
+            System.err.println("CANNOT LEAVE ANY OF THE STRINGS BLANK");
+            return 0.0;
+        } else {
+            // normalize everything
+            name1 = name1.toLowerCase().trim().replaceAll(" +", " ");
+            name2 = name2.toLowerCase().trim().replaceAll(" +", " ");
+            name3 = name3.toLowerCase().trim().replaceAll(" +", " ");
 
-        // implements the Sørensen Dice Coefficient
-        ArrayList<String> ngram1 = nGram(2, name1);
-        ArrayList<String> ngram2 = nGram(2, name3);
+            // get nGram of input strings
+            ArrayList<String> ngram1 = nGram(2, name1);
+            ArrayList<String> ngram2 = nGram(2, name3);
 
-        Set<String> set1 = new HashSet<String>();
-        Set<String> set2 = new HashSet<String>();
-        for(String token : ngram1) {
-            set1.addAll(Collections.singletonList(token));
+            Set<String> set1 = new HashSet<String>();
+            Set<String> set2 = new HashSet<String>();
+            for (String token : ngram1) {
+                set1.addAll(Collections.singletonList(token));
+            }
+            for (String token : ngram2) {
+                set2.addAll(Collections.singletonList(token));
+            }
+            System.out.println("First diced: " + set1 + "\nSecond diced: " + set2);
+
+            // find common elements
+            Set<String> intersection = new HashSet<String>(set1);
+            intersection.retainAll(set2);
+            numberOfSpaces = intersection.size();
+            System.out.println("Common terms: " + numberOfSpaces);
+
+            result = diceFunction(numberOfSpaces, 0.0, set1.size(), set2.size());
+            // add the if statements for string1 and string2 > 25 condition
+            // add the common terms
+            System.out.println("The Dice Coefficient is: " + diceFunction(numberOfSpaces, 0.0, set1.size(), set2.size()));
         }
-        for(String token : ngram2) {
-            set2.addAll(Collections.singletonList(token));
-        }
-        System.out.println("First diced: "+set1 + "\nSecond diced: " +set2);
-
-        Set<String> intersection = new HashSet<String>(set1);
-        intersection.retainAll(set2);
-        double t = intersection.size();
-        System.out.println("Common terms: " +t);
-
-        System.out.println("The Dice Coefficient is: " +diceFunction(t, 0.0, set1.size(), set2.size()));
-
-        return 0.0;
+        // would return result
+        return result;
     }
 
     private static Double diceFunction(double t, double spaceScore, int stringLength1, int stringLength2) {
-        double result;
+        double result = 0;
         // users are able to initialize how much they'd like to score each space
-        result = (2*t)/(double)(stringLength1 + stringLength2) + spaceScore;
+        if(spaceScore < 0) {
+            System.err.println("CANNOT ASSIGN A NEGATIVE SPACESCORE");
+        } else {
+            result = (2 * t) / (double) (stringLength1 + stringLength2) - spaceScore;
+        }
         return result;
     }
 
     private static ArrayList<String> nGram(int n, String str) {
         ArrayList<String> ngrams = new ArrayList<String>();
+        // get spaces to distinguish between 1 word vs. many words
         int numberOfSpaces = 0;
-        for(char c : str.toCharArray()) {
-            if(c == ' ') {
+        for(char space : str.toCharArray()) {
+            if(space == ' ') {
                 numberOfSpaces++;
             }
         }
@@ -97,39 +111,28 @@ public class fuzzyMatch {
         // split sentence into array of substrings
         String[] split = str.split(" ");
         if(n > split.length) {
-            System.out.println("nGrams chosen is larger than the word length. Hint: word length = " +split.length);
+            System.err.println("One or both of the nGrams chosen is larger than the word length. Hint: word length = " +split.length);
         }
         for(int i=0; i<split.length-n +1; i++) {
-            words.add(concat(split, i,i+n));
+            words.add(append(split, i,i+n));
         }
         return words;
-    }
-
-    private static String concat(String[] words, int start, int end) {
-        StringBuilder sb = new StringBuilder();
-        for(int i = start; i < end; i++) {
-            if(i > start) {
-                sb.append(" ").append(words[i]);
-            } else {
-                sb.append(words[i]);
-            }
-        }
-        return sb.toString();
     }
 
     private static ArrayList<String> nGramOfOneWord(int n, String str) {
 //        String[] result = new String[str.length() -1];
         ArrayList<String> result = new ArrayList<String>();
         if (n>str.length()) {
-            System.out.println("nGrams chosen is larger than the word length. Hint: word length = " +str.length());
+            System.err.println("One or both of the nGrams chosen is larger than the word length. Hint: word length = " +str.length());
         } else {
 //            System.out.println("\nThe " + n + "Gram of: '" + str + "':");
+            // TODO: handle when n == 0
             for (int i = 0; i <= str.length() - n; i++) {
                 if (n == 1) {
                     result.add(Character.toString(str.charAt(i)));
 //                    System.out.print("'" + str.charAt(i) + "' ");
                 } else {
-                    result.add(str.substring(i,i+n));
+                    result.add(str.substring(i, i+n));
 //                    result[i] = str.substring(i, i + n);
 //                    System.out.print("'" + result[i].trim().replaceAll(" +", " ") + "' ");
                 }
@@ -139,27 +142,8 @@ public class fuzzyMatch {
         return result;
     }
 
-    // another string similarity matching
-    private static Double jaccardIndex(double t, int stringLength1, int stringLength2) {
-        double J;
-        J = t/(stringLength1+stringLength2);
-        return J;
-    }
-
-    private static void biGram(String str) {
-        String[] result = new String[str.length() -1];
-        System.out.println("The biGram of " +str + ":");
-        for(int i=0; i<=str.length() - 2; i++) {
-            result[i] = str.substring(i, i+2);
-            System.out.print("'"+result[i].trim().replaceAll(" +", " ")+"' ");
-        }
-        System.out.println("\n-> cardinality: "+result.length);
-
-    }
-
-
     private static Double FuzzyWithEditDistance(String string1, String string2) {
-        double result = 0.0;
+        double result;
         // ensure we are dividing by the longest length
         String longestString = string1;
         String shortestString = string2;
@@ -171,6 +155,12 @@ public class fuzzyMatch {
             System.out.print("Please enter a string.");
         }
         result = ((longestString.length()-editDistance(longestString, shortestString)) / (double) longestString.length());
+
+        if(string1.length() > 25 || string2.length() >25) {
+            System.out.println("The similarity is: " + result + ", using edit distance of: " +editDistance(string1,string2));
+        } else {
+            System.out.println("The similarity between (" + string1 + ", " + string2 + ") is: " + result + ", using edit distance of: " + editDistance(string1, string2));
+        }
         return result;
     }
 
@@ -211,8 +201,40 @@ public class fuzzyMatch {
         return (double)cost[string2.length()];
     }
 
+    // another string similarity matching
+    private static Double jaccardIndex(double t, int stringLength1, int stringLength2) {
+        double J;
+        J = t/(stringLength1+stringLength2);
+        return J;
+    }
+
+    // find biGram of a word
+    private static void biGram(String str) {
+        String[] result = new String[str.length() -1];
+        System.out.println("The biGram of " +str + ":");
+        for(int i=0; i<=str.length() - 2; i++) {
+            result[i] = str.substring(i, i+2);
+            System.out.print("'"+result[i].trim().replaceAll(" +", " ")+"' ");
+        }
+        System.out.println("\n-> cardinality: "+result.length);
+
+    }
+
+    // HELPERS
     private static int min(int a, int b, int c) {
         return Math.min(Math.min(a,b) ,c);
+    }
+
+    private static String append(String[] words, int startPos, int endPos) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = startPos; i < endPos; i++) {
+            if(i > startPos) {
+                stringBuilder.append(" ").append(words[i]);
+            } else {
+                stringBuilder.append(words[i]);
+            }
+        }
+        return stringBuilder.toString();
     }
 
 }
