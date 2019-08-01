@@ -1,4 +1,4 @@
-import com.sun.istack.internal.NotNull;
+import info.debatty.java.stringsimilarity.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,25 +9,33 @@ public class fuzzyMatch {
 
     public static void main(String[] args) {
         // test strings
-        String s1 = "Donald     Trump".toLowerCase().trim().replaceAll(" +", " ");
-        String s2 = "    Truman      Donald".toLowerCase().trim().replaceAll(" +", " ");
+        String s1 = "this is my".toLowerCase().trim().replaceAll(" +", " ");
+        String s2 = "this my is toy".toLowerCase().trim().replaceAll(" +", " ");
 
         // with Edit Distancef
         FuzzyWithEditDistance(s1,s2);
-        // the similarity between, with common dice terms of:
-
         // with Dice coefficient
         FuzzyWithDiceCoefficient(s1,s2,0.0,2);
+
+        // externals
+//        System.out.println("/====================/\nExternal Libraries:\n");
+//        NormalizedLevenshtein n  = new NormalizedLevenshtein();
+//        JaroWinkler jw = new JaroWinkler();
+//        SorensenDice sd = new SorensenDice();
+//        Jaccard j = new Jaccard();
+//        System.out.println("Edit Distance Similarity: " + (1-n.distance(s1,s2)));
+//        // best suited for person names
+//        System.out.println("Jaro-Winkler Similarity: " + (1-jw.distance(s1,s2)));
+//        System.out.println("Dice Similarity: (cannot indicate how many ngrams) " + sd.similarity(s1,s2));
     }
 
     private static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGram) {
-        String name1 = "night";
+        String name1 = "this is my";
         String name2 = "The, quick brown fo.x jumped! Yes? Indeed( )";
-        String name3 = "nachtig";
+        String name3 = "this my is";
         String name4 = "   Donald    Trump    ";
         String name5 = "Trump Donald";
-        double numberOfSpaces;
-        double result;
+        double result, commonTerms;
 
         if(name1 == null || name1.length() == 0 || name3 == null || name3.length() == 0) {
             System.err.println("CANNOT LEAVE ANY OF THE STRINGS BLANK");
@@ -37,11 +45,14 @@ public class fuzzyMatch {
             name1 = name1.toLowerCase().trim().replaceAll(" +", " ");
             name2 = name2.toLowerCase().trim().replaceAll(" +", " ");
             name3 = name3.toLowerCase().trim().replaceAll(" +", " ");
+            string1 = string1.toLowerCase().trim().replaceAll(" +", " ");
+            string2 = string2.toLowerCase().trim().replaceAll(" +", " ");
 
             // get nGram of input strings
-            ArrayList<String> ngram1 = nGram(2, name1);
-            ArrayList<String> ngram2 = nGram(2, name3);
+            ArrayList<String> ngram1 = nGram(1, name1);
+            ArrayList<String> ngram2 = nGram(1, name3);
 
+            // HashSet ignores duplicates - if there are duplicates: this is my is - then `is` counted once
             Set<String> set1 = new HashSet<String>();
             Set<String> set2 = new HashSet<String>();
             for (String token : ngram1) {
@@ -50,18 +61,30 @@ public class fuzzyMatch {
             for (String token : ngram2) {
                 set2.addAll(Collections.singletonList(token));
             }
-            System.out.println("First diced: " + set1 + "\nSecond diced: " + set2);
-
+            System.out.println("First diced: " + ngram1 + "\nSecond diced: " + ngram2);
             // find common elements
-            Set<String> intersection = new HashSet<String>(set1);
-            intersection.retainAll(set2);
-            numberOfSpaces = intersection.size();
-            System.out.println("Common terms: " + numberOfSpaces);
+//            Set<String> intersection = new HashSet<String>(set1);
+//            intersection.retainAll(set2);
+//            numberofCommonTerms = intersection.size();
+//            System.out.println("Common terms: " + numberofCommonTerms);
 
-            result = diceFunction(numberOfSpaces, 0.0, set1.size(), set2.size());
-            // add the if statements for string1 and string2 > 25 condition
-            // add the common terms
-            System.out.println("The Dice Coefficient is: " + diceFunction(numberOfSpaces, 0.0, set1.size(), set2.size()));
+            ArrayList<String> intersection = new ArrayList<String>(ngram1);
+            intersection.retainAll(ngram2);
+            commonTerms = intersection.size();
+            System.out.println("Common terms: "+ commonTerms);
+
+            for(int i =0; i<ngram1.size(); i++) {
+                if(ngram1.get(i).equals(ngram2.get(i))){
+
+                    System.out.println("1");
+                } else{
+                    System.out.println("0");
+                }
+            }
+            System.out.println(intersection);
+            result = diceFunction(commonTerms, 0.0, ngram1.size(), ngram2.size());
+            System.out.println("\nDICE COEFFICIENT: The similarity between (" + name1 + ", " + name3 + ") is: " + result + ", with common terms of: " + commonTerms);
+
         }
         // would return result
         return result;
@@ -78,7 +101,7 @@ public class fuzzyMatch {
         return result;
     }
 
-    private static ArrayList<String> nGram(int n, String str) {
+    public static ArrayList<String> nGram(int n, String str) {
         ArrayList<String> ngrams = new ArrayList<String>();
         // get spaces to distinguish between 1 word vs. many words
         int numberOfSpaces = 0;
@@ -87,7 +110,7 @@ public class fuzzyMatch {
                 numberOfSpaces++;
             }
         }
-        System.out.println("The number of spaces: " +numberOfSpaces);
+//        System.out.println("The number of spaces: " +numberOfSpaces);
         if(numberOfSpaces > 0) {
             // handle any other use cases
             if (str.contains(",") || str.contains("!") || str.contains("?") || str.contains("(") || str.contains(")") || str.contains(".")) {
@@ -156,16 +179,13 @@ public class fuzzyMatch {
         }
         result = ((longestString.length()-editDistance(longestString, shortestString)) / (double) longestString.length());
 
-        if(string1.length() > 25 || string2.length() >25) {
-            System.out.println("The similarity is: " + result + ", using edit distance of: " +editDistance(string1,string2));
-        } else {
-            System.out.println("The similarity between (" + string1 + ", " + string2 + ") is: " + result + ", using edit distance of: " + editDistance(string1, string2));
-        }
+        System.out.println("EDIT DISTANCE: The similarity between (" + string1 + ", " + string2 + ") is: " + result + ", using edit distance of: " + editDistance(string1, string2));
+
         return result;
     }
 
     // Levenshtein Edit Distance
-    private static Double editDistance(String string1, String string2) {
+    public static Double editDistance(String string1, String string2) {
         // lowercase all inputs for consistency
         string1 = string1.toLowerCase();
         string2 = string2.toLowerCase();
