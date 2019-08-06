@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-public class fuzzyMatch {
+public class fuzzyRepo {
 
     public static void main(String[] args) {
         // test strings
-        String s1 = "one two three four";
-        String s2 = "four three two one";
+        String s1 = "one two three four".toLowerCase().trim().replaceAll(" +", " ");
+        String s2 = "four three two one".toLowerCase().trim().replaceAll(" +", " ");
 
         // with Edit Distance
         FuzzyWithEditDistance(s1,s2);
         // with Dice coefficient
-        FuzzyWithDiceCoefficient(s1,s2,0.0,1);
+        FuzzyWithDiceCoefficient(s1,s2,0.05,1);
 
         // externals
 //        System.out.println("/====================/\nExternal Libraries:\n");
@@ -30,82 +29,60 @@ public class fuzzyMatch {
 //        System.out.println("Dice Similarity: (cannot indicate how many ngrams) " + sd.similarity(s1,s2));
     }
 
-    private static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGrams) {
-        double result = 0.0, commonTerms;
+    private static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGram) {
+        String name1 = "one two three four";
+        String name3 = "four three two one";
+        String name2 = "The, quick brown fo.x jumped! Yes? Indeed( )";
+        String name4 = "   Donald    Trump    ";
+        String name5 = "Trump Donald";
+        double result, commonTerms;
 
-        if(string1 == null || string1.length() == 0 || string2 == null || string2.length() == 0) {
+        if(name1 == null || name1.length() == 0 || name3 == null || name3.length() == 0) {
             System.err.println("CANNOT LEAVE ANY OF THE STRINGS BLANK");
-            return result;
+            return 0.0;
         } else {
             // normalize everything
+            name1 = name1.toLowerCase().trim().replaceAll(" +", " ");
+            name2 = name2.toLowerCase().trim().replaceAll(" +", " ");
+            name3 = name3.toLowerCase().trim().replaceAll(" +", " ");
             string1 = string1.toLowerCase().trim().replaceAll(" +", " ");
             string2 = string2.toLowerCase().trim().replaceAll(" +", " ");
 
             // get nGram of input strings
-            ArrayList<String> ngram1 = nGram(numberOfGrams, string1);
-            ArrayList<String> ngram2 = nGram(numberOfGrams, string2);
-            System.out.println("First diced: " + ngram1 + "\nSecond diced: " + ngram2);
+            ArrayList<String> ngram1 = nGram(numberOfGram, string1);
+            ArrayList<String> ngram2 = nGram(numberOfGram, string2);
+//            System.out.println("First diced: " + ngram1 + "\nSecond diced: " + ngram2);
 
             // find common elements
-            ArrayList<String> intersection = getCommonTerms(ngram1, ngram2);
-            System.out.println("intersection: "+intersection);
+            ArrayList<String> intersection = new ArrayList<String>(ngram1);
+            intersection.retainAll(ngram2);
             commonTerms = intersection.size();
 
+            int longestDist = ngram1.size(), shortestDist = ngram2.size();
+            if(ngram2.size() > ngram1.size()) {
+                longestDist = ngram2.size();
+                shortestDist = ngram1.size();
+            }
             // account for positioning of words
-            double matches = getWordMatches(ngram1, ngram2);
-            System.out.println("Number of mixmatches: " +matches);
-            spaceScore *= matches;
-
+            double pos = 0;
+            for(int i = 0; i<shortestDist; i++){
+                if(ngram1.indexOf(ngram2.get(i)) >=0) {
+                    pos++;
+                    // takes order into consideration
+                    if(ngram1.get(i).equals(ngram2.get(i)) && ngram1.indexOf(ngram2.get(i)) == ngram2.indexOf(ngram1.get(i))){
+                        pos--;
+                    } else if(ngram1.indexOf(ngram2.get(i)) != ngram2.indexOf(ngram1.get(i))) {
+                        pos--;
+                    }
+                }
+            }
+            System.out.println("Number of mismatches: "+pos);
+            System.out.println("Common terms: "+intersection);
+            spaceScore *= pos;
             result = diceFunction(commonTerms, spaceScore, ngram1.size(), ngram2.size());
             System.out.println("\nDICE COEFFICIENT: The similarity between (" + string1 + ", " + string2 + ") is: " + result + ", with common terms of: " + commonTerms);
         }
         return result;
-    }
-
-    private static ArrayList<String> getCommonTerms(ArrayList<String> ngram1, ArrayList<String> ngram2) {
-        ArrayList<String> intersection = new ArrayList<String>();
-
-        int longestDist = ngram1.size(), shortestDist = ngram2.size();
-        ArrayList<String> longestArr = ngram1;
-        ArrayList<String> shortestArr = ngram2;
-
-        if(ngram2.size() > ngram1.size()) {
-            longestDist = ngram2.size();
-            shortestDist = ngram1.size();
-            longestArr = ngram2;
-            shortestArr = ngram1;
-        }
-        for(int i =0; i<longestDist; i++) {
-            if(shortestArr.contains(longestArr.get(i))) {
-                intersection.add(longestArr.get(i));
-            }
-        }
-        return intersection;
-    }
-    private static Double getWordMatches(ArrayList<String> ngram1, ArrayList<String> ngram2) {
-        double pos = 0;
-
-        int longestDist = ngram1.size(), shortestDist = ngram2.size();
-        if(ngram2.size() > ngram1.size()) {
-            longestDist = ngram2.size();
-            shortestDist = ngram1.size();
-        }
-        for(int i =0; i<shortestDist; i++) {
-            if (ngram1.indexOf(ngram2.get(i)) != -1) {
-//                System.out.println(ngram1.get(i));
-//                System.out.println("intersection: "+intersection);
-                pos++;
-                // takes order into consideration (ex: this is my is vs. this is my friend)
-                if (ngram1.get(i).equals(ngram2.get(i)) && ngram1.indexOf(ngram2.get(i)) == ngram2.indexOf(ngram1.get(i))) {
-                    // don't count words that have the same index and same word
-                    pos--;
-                    // indices are not equal
-                } else if (ngram1.indexOf(ngram2.get(i)) != ngram2.indexOf(ngram1.get(i))) {
-                    pos--;
-                }
-            }
-        }
-        return pos;
     }
 
     private static Double diceFunction(double t, double spaceScore, int stringLength1, int stringLength2) {
@@ -169,24 +146,22 @@ public class fuzzyMatch {
 //            System.out.println("\nThe " + n + "Gram of: '" + str + "':");
             // TODO: handle when n == 0
             for (int i = 0; i <= str.length() - n; i++) {
-//                if (n == 1) {
-//                    result.add(Character.toString(str.charAt(i)));
-////                    System.out.print("'" + str.charAt(i) + "' ");
-//                }
-                result.add(str.substring(i, i+n));
-
+                if (n == 1) {
+                    result.add(Character.toString(str.charAt(i)));
+//                    System.out.print("'" + str.charAt(i) + "' ");
+                } else {
+                    result.add(str.substring(i, i+n));
+//                    result[i] = str.substring(i, i + n);
+//                    System.out.print("'" + result[i].trim().replaceAll(" +", " ") + "' ");
+                }
             }
+//            System.out.println("\n-> cardinality: " + result.length);
         }
         return result;
     }
 
     private static Double FuzzyWithEditDistance(String string1, String string2) {
         double result;
-
-        // normalize everything
-        string1 = string1.toLowerCase().trim().replaceAll(" +", " ");
-        string2 = string2.toLowerCase().trim().replaceAll(" +", " ");
-
         // ensure we are dividing by the longest length
         String longestString = string1;
         String shortestString = string2;
@@ -206,6 +181,14 @@ public class fuzzyMatch {
 
     // Levenshtein Edit Distance
     public static Double editDistance(String string1, String string2) {
+        // lowercase all inputs for consistency
+        string1 = string1.toLowerCase();
+        string2 = string2.toLowerCase();
+
+        // normalize chain of spaces
+        string1 = string1.trim().replaceAll(" +", " ");
+        string2 = string2.trim().replaceAll(" +", " ");
+
         // perform scoring - edit distance
         // if similar (cost)
         int[] cost = new int[string2.length() +1]; // +1 for seed cell (remainder) -- just a number
