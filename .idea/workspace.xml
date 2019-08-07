@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="971794d9-a351-4a7a-9014-9f296f2a79eb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fuzzyUpdatedRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fuzzyMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fuzzyMatch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/fuzzyMatch.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fuzzyMatch.class" afterDir="false" />
@@ -22,25 +23,37 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+            <state relative-caret-position="273">
+              <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+              <folding>
+                <element signature="method#diceFunction#0;class#fuzzyMatch#0" />
+                <element signature="method#nGramofManyWords#0;class#fuzzyMatch#0" />
+                <element signature="method#jaccardIndex#0;class#fuzzyMatch#0" />
+                <element signature="e#12057#12058#0" expanded="true" />
+                <element signature="e#12106#12107#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyUpdatedRepo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#547#559#0" />
                 <element signature="method#FuzzyWithDiceCoefficient#0;class#fuzzyMatch#0" />
                 <element signature="method#getCommonTerms#0;class#fuzzyMatch#0" />
-                <element signature="e#2993#3001#0" expanded="true" />
                 <element signature="method#getWordMatches#0;class#fuzzyMatch#0" />
                 <element signature="method#diceFunction#0;class#fuzzyMatch#0" />
                 <element signature="method#nGram#0;class#fuzzyMatch#0" />
-                <element signature="e#4280#4288#0" expanded="true" />
                 <element signature="method#nGramofManyWords#0;class#fuzzyMatch#0" />
                 <element signature="method#nGramOfOneWord#0;class#fuzzyMatch#0" />
-                <element signature="e#6037#6045#0" expanded="true" />
                 <element signature="method#editDistance#0;class#fuzzyMatch#0" />
                 <element signature="method#jaccardIndex#0;class#fuzzyMatch#0" />
                 <element signature="method#biGram#0;class#fuzzyMatch#0" />
-                <element signature="e#10281#10331#1" />
+                <element signature="e#12057#12058#0" expanded="true" />
                 <element signature="e#12106#12107#0" expanded="true" />
                 <element signature="method#append#0;class#fuzzyMatch#0" />
               </folding>
@@ -51,7 +64,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="441">
               <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
             </state>
           </provider>
@@ -60,11 +73,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/positionScoreBetweenStrings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
+            <state relative-caret-position="714">
               <caret line="34" selection-start-line="34" selection-end-line="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#772#780#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyRepo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1044">
+            <state relative-caret-position="1533">
               <caret line="73" column="54" selection-start-line="73" selection-start-column="54" selection-end-line="73" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -109,6 +121,7 @@
         <option value="$PROJECT_DIR$/src/main/java/fuzzyRepo.java" />
         <option value="$PROJECT_DIR$/src/main/java/positionScoreBetweenStrings.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/fuzzyUpdatedRepo.java" />
         <option value="$PROJECT_DIR$/src/main/java/fuzzyMatch.java" />
       </list>
     </option>
@@ -120,7 +133,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1680" />
     <option name="height" value="1050" />
   </component>
@@ -129,7 +142,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -159,7 +172,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -229,7 +242,7 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25274727" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25579977" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -318,9 +331,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positionScoreBetweenStrings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyRepo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
+        <state relative-caret-position="1533">
           <caret line="73" column="54" selection-start-line="73" selection-start-column="54" selection-end-line="73" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -328,47 +358,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyUpdatedRepo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positionScoreBetweenStrings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="210">
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#772#780#0" expanded="true" />
+            <element signature="method#FuzzyWithDiceCoefficient#0;class#fuzzyMatch#0" />
+            <element signature="method#getCommonTerms#0;class#fuzzyMatch#0" />
+            <element signature="method#getWordMatches#0;class#fuzzyMatch#0" />
+            <element signature="method#diceFunction#0;class#fuzzyMatch#0" />
+            <element signature="method#nGram#0;class#fuzzyMatch#0" />
+            <element signature="method#nGramofManyWords#0;class#fuzzyMatch#0" />
+            <element signature="method#nGramOfOneWord#0;class#fuzzyMatch#0" />
+            <element signature="method#editDistance#0;class#fuzzyMatch#0" />
+            <element signature="method#jaccardIndex#0;class#fuzzyMatch#0" />
+            <element signature="method#biGram#0;class#fuzzyMatch#0" />
+            <element signature="e#12057#12058#0" expanded="true" />
+            <element signature="e#12106#12107#0" expanded="true" />
+            <element signature="method#append#0;class#fuzzyMatch#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+        <state relative-caret-position="273">
+          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#547#559#0" />
-            <element signature="method#FuzzyWithDiceCoefficient#0;class#fuzzyMatch#0" />
-            <element signature="method#getCommonTerms#0;class#fuzzyMatch#0" />
-            <element signature="e#2993#3001#0" expanded="true" />
-            <element signature="method#getWordMatches#0;class#fuzzyMatch#0" />
             <element signature="method#diceFunction#0;class#fuzzyMatch#0" />
-            <element signature="method#nGram#0;class#fuzzyMatch#0" />
-            <element signature="e#4280#4288#0" expanded="true" />
             <element signature="method#nGramofManyWords#0;class#fuzzyMatch#0" />
-            <element signature="method#nGramOfOneWord#0;class#fuzzyMatch#0" />
-            <element signature="e#6037#6045#0" expanded="true" />
-            <element signature="method#editDistance#0;class#fuzzyMatch#0" />
             <element signature="method#jaccardIndex#0;class#fuzzyMatch#0" />
-            <element signature="method#biGram#0;class#fuzzyMatch#0" />
-            <element signature="e#10281#10331#1" />
+            <element signature="e#12057#12058#0" expanded="true" />
             <element signature="e#12106#12107#0" expanded="true" />
-            <element signature="method#append#0;class#fuzzyMatch#0" />
           </folding>
         </state>
       </provider>
