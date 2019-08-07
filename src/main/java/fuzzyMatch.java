@@ -127,7 +127,7 @@ public class fuzzyMatch {
         return result;
     }
 
-    public static ArrayList<String> nGram(int n, String str) {
+    private static ArrayList<String> nGram(int n, String str) {
         ArrayList<String> ngrams = new ArrayList<String>();
         // get spaces to distinguish between 1 word vs. many words
         int numberOfSpaces = 0;
@@ -199,7 +199,7 @@ public class fuzzyMatch {
     }
 
     // Levenshtein Edit Distance
-    public static Double editDistance(String string1, String string2) {
+    private static Double editDistance(String string1, String string2) {
         // perform scoring - edit distance
         int[] cost = new int[string2.length() +1]; // +1 for seed cell (remainder) -- just a number
 
@@ -234,6 +234,11 @@ public class fuzzyMatch {
     }
 
     // find biGram of a word
+
+    /**
+     * something
+     * @param str
+     */
     private static void biGram(String str) {
         String[] result = new String[str.length() -1];
         System.out.println("The biGram of " +str + ":");

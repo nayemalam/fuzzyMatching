@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
+// need to make editDistance and nGran : public in fuzzyMatch.java to run this code!!
+
 public class positionScoreBetweenStrings extends fuzzyMatch {
     public static void main(String[] args) {
         System.out.println(editDistance("Hello", "Hero"));
