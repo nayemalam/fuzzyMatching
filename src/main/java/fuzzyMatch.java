@@ -1,22 +1,18 @@
 import info.debatty.java.stringsimilarity.*;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
 public class fuzzyMatch {
 
     public static void main(String[] args) {
-        // test strings
-        String s1 = "one two three four";
-        String s2 = "four three two one";
+        String[] testStrings =
+                {"the cat in the hat", "the hat in the cat",
+                 "this is my", "this my is",
+                 "nayem       alam", "AlaM NaYem",
+                 "night", "nacht"
+                };
 
-        // with Edit Distance
-        FuzzyWithEditDistance(s1,s2);
-        // with Dice coefficient
-        FuzzyWithDiceCoefficient(s1,s2,0.0,1);
+        runFuzzyMatching(testStrings, 0.05, 2);
 
         // externals
 //        System.out.println("/====================/\nExternal Libraries:\n");
@@ -28,6 +24,34 @@ public class fuzzyMatch {
 //        // best suited for person names
 //        System.out.println("Jaro-Winkler Similarity: " + (1-jw.distance(s1,s2)));
 //        System.out.println("Dice Similarity: (cannot indicate how many ngrams) " + sd.similarity(s1,s2));
+    }
+
+    private static void runFuzzyMatching(String[] testStrings, Double spaceScore, int numberOfGrams) {
+
+        String testString1, testString2;
+        // with Edit Distance
+        for(int i = 0; i<testStrings.length-1; i+=2) {
+            testString1 = testStrings[i].toLowerCase().trim().replaceAll(" +", " ");
+            testString2 = testStrings[i+1].toLowerCase().trim().replaceAll(" +", " ");
+
+            Double editDistance = editDistance(testString1, testString2);
+            Double fuzzyEdit = FuzzyWithEditDistance(testString1, testString2);
+
+            System.out.println("EDIT DISTANCE: the similarity between " + "(" +testString1+ ", " +testString2+ ") is: " +fuzzyEdit+ ", with edit distance of: " +editDistance);
+        }
+        System.out.println(" ");
+        // with Dice Coefficient
+        for(int i = 0; i<testStrings.length-1; i+=2) {
+            testString1 = testStrings[i].toLowerCase().trim().replaceAll(" +", " ");
+            testString2 = testStrings[i+1].toLowerCase().trim().replaceAll(" +", " ");
+            Double fuzzyDice = FuzzyWithDiceCoefficient(testString1, testString2, spaceScore, numberOfGrams);
+            ArrayList<String> ngram1 = nGram(numberOfGrams, testString1);
+            ArrayList<String> ngram2 = nGram(numberOfGrams, testString2);
+            double diceTerms = getCommonTerms(ngram1, ngram2).size();
+
+            System.out.println("DICE COEFFICIENT: the similarity between " + "(" +ngram1+ ", " +ngram2+ ") is: " +fuzzyDice+ ", with common terms of: " +diceTerms);
+        }
+
     }
 
     private static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGrams) {
@@ -44,20 +68,20 @@ public class fuzzyMatch {
             // get nGram of input strings
             ArrayList<String> ngram1 = nGram(numberOfGrams, string1);
             ArrayList<String> ngram2 = nGram(numberOfGrams, string2);
-            System.out.println("First diced: " + ngram1 + "\nSecond diced: " + ngram2);
+//            System.out.println("First diced: " + ngram1 + "\nSecond diced: " + ngram2);
 
             // find common elements
             ArrayList<String> intersection = getCommonTerms(ngram1, ngram2);
-            System.out.println("intersection: "+intersection);
+//            System.out.println("Intersection: "+intersection);
             commonTerms = intersection.size();
 
             // account for positioning of words
             double matches = getWordMatches(ngram1, ngram2);
-            System.out.println("Number of mixmatches: " +matches);
+//            System.out.println("Number of mismatches: " +matches);
             spaceScore *= matches;
 
             result = diceFunction(commonTerms, spaceScore, ngram1.size(), ngram2.size());
-            System.out.println("\nDICE COEFFICIENT: The similarity between (" + string1 + ", " + string2 + ") is: " + result + ", with common terms of: " + commonTerms);
+//            System.out.println("\nDICE COEFFICIENT: The similarity between (" + string1 + ", " + string2 + ") is: " + result + ", with common terms of: " + commonTerms);
         }
         return result;
     }
@@ -65,7 +89,8 @@ public class fuzzyMatch {
     private static ArrayList<String> getCommonTerms(ArrayList<String> ngram1, ArrayList<String> ngram2) {
         ArrayList<String> intersection = new ArrayList<String>();
 
-        int longestDist = ngram1.size(), shortestDist = ngram2.size();
+        int longestDist = ngram1.size();
+        int shortestDist = ngram2.size();
         ArrayList<String> longestArr = ngram1;
         ArrayList<String> shortestArr = ngram2;
 
@@ -82,10 +107,12 @@ public class fuzzyMatch {
         }
         return intersection;
     }
+
     private static Double getWordMatches(ArrayList<String> ngram1, ArrayList<String> ngram2) {
         double pos = 0;
 
-        int longestDist = ngram1.size(), shortestDist = ngram2.size();
+        int longestDist = ngram1.size();
+        int shortestDist = ngram2.size();
         if(ngram2.size() > ngram1.size()) {
             longestDist = ngram2.size();
             shortestDist = ngram1.size();
@@ -181,7 +208,7 @@ public class fuzzyMatch {
     }
 
     private static Double FuzzyWithEditDistance(String string1, String string2) {
-        double result;
+        double result = 0;
 
         // normalize everything
         string1 = string1.toLowerCase().trim().replaceAll(" +", " ");
@@ -196,10 +223,11 @@ public class fuzzyMatch {
         }
         if(longestString.length() == 0) {
             System.out.print("Please enter a string.");
+            return result;
         }
         result = ((longestString.length()-editDistance(longestString, shortestString)) / (double) longestString.length());
 
-        System.out.println("EDIT DISTANCE: The similarity between (" + string1 + ", " + string2 + ") is: " + result + ", using edit distance of: " + editDistance(string1, string2));
+//        System.out.println("EDIT DISTANCE: The similarity between (" + string1 + ", " + string2 + ") is: " + result + ", using edit distance of: " + editDistance(string1, string2));
 
         return result;
     }
