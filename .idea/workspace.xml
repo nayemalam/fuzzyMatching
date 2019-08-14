@@ -4,14 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="971794d9-a351-4a7a-9014-9f296f2a79eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fuzzyMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fuzzyMatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/positionScoreBetweenStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positionScoreBetweenStrings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fuzzyMatch.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fuzzyMatch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/positionScoreBetweenStrings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/positionScoreBetweenStrings.class" afterDir="false" />
-    </list>
+    <list default="true" id="971794d9-a351-4a7a-9014-9f296f2a79eb" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,7 +18,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/fuzzyMatch.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="6256">
@@ -35,6 +28,15 @@
                 <element signature="method#biGram#0;class#fuzzyMatch#0" />
                 <element signature="method#append#0;class#fuzzyMatch#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/extra/Algorithm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -156,6 +158,11 @@
             <path>
               <item name="fuzzyMatching" type="b2602c69:ProjectViewProjectNode" />
               <item name="fuzzyMatching" type="462c0819:PsiDirectoryNode" />
+              <item name="extra" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fuzzyMatching" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fuzzyMatching" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -199,7 +206,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.fuzzyMatch">
+  <component name="RunManager" selected="Application.Algorithm">
+    <configuration name="Algorithm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="extra.Algorithm" />
+      <module name="fuzzyMatching" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="extra.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="fuzzyMatch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fuzzyMatch" />
       <module name="fuzzyMatching" />
@@ -223,6 +243,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Algorithm" />
         <item itemvalue="Application.fuzzyMatch" />
         <item itemvalue="Application.positionScoreBetweenStrings" />
         <item itemvalue="Application.testClass" />
@@ -244,8 +265,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25885227" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25885227" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -377,6 +399,13 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extra/Algorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
         </state>
       </provider>
     </entry>
