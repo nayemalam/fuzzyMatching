@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * <a href="https://en.wikipedia.org/wiki/Approximate_string_matching">Fuzzy Matching</a> implemented to compare the similarity between two given strings
+ * <br>Both strings can be of any length and may contain multiple words
+ * <br>Objective is to return a score between [0.0, 1.0] based on how similar the two input strings are
+ * @author Nayem Alam
+ */
 public class fuzzyMatch {
 
     public static void main(String[] args) {
@@ -13,6 +19,15 @@ public class fuzzyMatch {
         runFuzzyMatching(testStrings, 0.0, 1);
     }
 
+    /**
+     * This method performs two Fuzzy Matching algorithms and outputs on Print Stream
+     * <br>test method to run FuzzyMatching with both
+     * <i><a href="#FuzzyWithDiceCoefficient-java.lang.String-java.lang.String-java.lang.Double-int-">FuzzyWithDiceCoefficient</a></i> and
+     * <i><a href="#FuzzyWithEditDistance-java.lang.String-java.lang.String-">FuzzyWithEditDistance</a></i>
+     * @param testStrings list of string pairs
+     * @param spaceScore score between [0.0, 1.0]
+     * @param numberOfGrams number of grams
+     */
     private static void runFuzzyMatching(String[] testStrings, Double spaceScore, int numberOfGrams) {
 
         String testString1, testString2;
@@ -36,11 +51,22 @@ public class fuzzyMatch {
             ArrayList<String> ngram2 = nGram(numberOfGrams, testString2);
             double diceTerms = getCommonTerms(ngram1, ngram2).size();
 
+            System.out.println("Jaccard Coefficient: " +jaccardIndex(diceTerms, ngram1.size(), ngram2.size()));
+
             System.out.println("DICE COEFFICIENT: the similarity between " + "(" +ngram1+ ", " +ngram2+ ") is: " +fuzzyDice+ ", with common terms of: " +diceTerms);
         }
 
     }
 
+    /**
+     * This method performs the fuzzy similarity matching using the dice coefficient
+     * @param string1 first input string (one or many words)
+     * @param string2 second input string (one or many words)
+     * @param spaceScore score between [0.0, 1.0]
+     * @param numberOfGrams number of grams
+     * @return a value between [0.0,1.0] which gives the similarity between two words based on the dice coefficient - values closer to <i>1.0</i>
+     * have higher similarity
+     */
     private static Double FuzzyWithDiceCoefficient(String string1, String string2, Double spaceScore, int numberOfGrams) {
         double result = 0.0, commonTerms;
 
@@ -69,6 +95,13 @@ public class fuzzyMatch {
         return result;
     }
 
+    /**
+     * This method finds all the common elements between two array lists
+     * <br>alternate to <a href="https://www.geeksforgeeks.org/arraylist-retainall-method-in-java/">retainAll() method</a>
+     * @param ngram1 list of word(s) diced (i.e. with its corresponding ngrams)
+     * @param ngram2 list of word(s) diced (i.e. with its corresponding ngrams)
+     * @return the common terms between two lists
+     */
     private static ArrayList<String> getCommonTerms(ArrayList<String> ngram1, ArrayList<String> ngram2) {
         ArrayList<String> intersection = new ArrayList<String>();
 
@@ -91,6 +124,12 @@ public class fuzzyMatch {
         return intersection;
     }
 
+    /**
+     * This method identifies the positioning of similar words between two lists (i.e. different index but same word)
+     * @param ngram1 list of word(s) diced (i.e. with its corresponding ngrams)
+     * @param ngram2 list of word(s) diced (i.e. with its corresponding ngrams)
+     * @return the number of similar words that are in different positions
+     */
     private static Double getWordMatches(ArrayList<String> ngram1, ArrayList<String> ngram2) {
         double pos = 0;
 
@@ -116,6 +155,14 @@ public class fuzzyMatch {
         return pos;
     }
 
+    /**
+     * This method performs the <a href="https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient">Sørensen–Dice coefficient</a>
+     * @param t number of common elements between the two input strings
+     * @param spaceScore score that accounts for similar words but positions are mismatched
+     * @param stringLength1 length of string 1
+     * @param stringLength2 length of string 2
+     * @return the dice coefficient between two strings
+     */
     private static Double diceFunction(double t, double spaceScore, int stringLength1, int stringLength2) {
         double result = 0;
         // users are able to initialize how much they'd like to score for every mismatch in position of words
@@ -127,7 +174,15 @@ public class fuzzyMatch {
         return result;
     }
 
-    private static ArrayList<String> nGram(int n, String str) {
+    /**
+     * This method takes care of both one word and multiple words and removes punctuations from any word
+     * <br>uses both <i><a href="#nGramofManyWords-int-java.lang.String-">nGramofManyWords</a></i>
+     * and <i><a href="#nGramOfOneWord-int-java.lang.String-">nGramOfOneWord</a></i>
+     * @param n number of grams
+     * @param str any string
+     * @return the unigram, bigram, trigram, four-gram, etc... (depending of chosen <i>n</i>) of input <i>str</i>
+     */
+    public static ArrayList<String> nGram(int n, String str) {
         ArrayList<String> ngrams = new ArrayList<String>();
         // get spaces to distinguish between 1 word vs. many words
         int numberOfSpaces = 0;
@@ -150,6 +205,12 @@ public class fuzzyMatch {
         return ngrams;
     }
 
+    /**
+     * This method breaks multiple words into <a href="https://en.wikipedia.org/wiki/N-gram">ngrams</a>
+     * @param n number of grams
+     * @param str multiple words
+     * @return the unigram, bigram, trigram, four-gram, etc... (depending of chosen <i>n</i>) of input <i>str</i>
+     */
     private static ArrayList<String> nGramofManyWords(int n, String str) {
         ArrayList<String> words = new ArrayList<String>();
         // split sentence into array of substrings
@@ -163,6 +224,13 @@ public class fuzzyMatch {
         return words;
     }
 
+    /**
+     * This method breaks one word into <a href="https://en.wikipedia.org/wiki/N-gram">ngrams</a>
+     * <br>superior method to <i><a href="#biGram-java.lang.String-">biGram</a></i>
+     * @param n number of grams
+     * @param str one word
+     * @return the unigram, bigram, trigram, four-gram, etc... (depending of chosen <i>n</i>) of input <i>str</i>
+     */
     private static ArrayList<String> nGramOfOneWord(int n, String str) {
         ArrayList<String> result = new ArrayList<String>();
         if (n>str.length()) {
@@ -175,6 +243,12 @@ public class fuzzyMatch {
         return result;
     }
 
+    /**
+     * This method performs the fuzzy similarity matching using the edit distance
+     * @param string1 word or sentence
+     * @param string2 word or sentence
+     * @return a value between [0.0,1.0] which gives the similarity between two words based on their edit distance - values closer to <i>1.0</i> have higher similarity
+     */
     private static Double FuzzyWithEditDistance(String string1, String string2) {
         double result = 0;
 
@@ -198,8 +272,14 @@ public class fuzzyMatch {
         return result;
     }
 
+    /**
+     * This method performs the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein Edit Distance</a>
+     * @param string1 word or sentence
+     * @param string2 word or sentence
+     * @return the edit distance between two strings
+     */
     // Levenshtein Edit Distance
-    private static Double editDistance(String string1, String string2) {
+    public static Double editDistance(String string1, String string2) {
         // perform scoring - edit distance
         int[] cost = new int[string2.length() +1]; // +1 for seed cell (remainder) -- just a number
 
@@ -226,18 +306,25 @@ public class fuzzyMatch {
         return (double)cost[string2.length()];
     }
 
-    // another string similarity matching
+    /**
+     * This method performs the <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard Coefficient</a>
+     * @param t number of common elements in both sets
+     * @param stringLength1 number of elements in set 1
+     * @param stringLength2 number of elements in set 2
+     * @return the jaccard index
+     */
     private static Double jaccardIndex(double t, int stringLength1, int stringLength2) {
-        double J;
-        J = t/(stringLength1+stringLength2);
+        // formula from: https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient#Difference_from_Jaccard
+        Double J;
+        Double S = diceFunction(t,0.0, stringLength1, stringLength2);
+        J = S/(2-S);
         return J;
     }
 
-    // find biGram of a word
-
     /**
-     * something
-     * @param str
+     * This method breaks one word into bigram(s) (2 adjacent elements from a string of tokens)
+     * @param str one word input
+     * <br>Print Streams the bigram(s) of word and the corresponding cardinality
      */
     private static void biGram(String str) {
         String[] result = new String[str.length() -1];
@@ -251,10 +338,25 @@ public class fuzzyMatch {
     }
 
     // HELPERS
+
+    /**
+     * This method first returns the smaller value between a and b, and then returns the smaller value between (a,b) and c
+     * @param a some value
+     * @param b some value
+     * @param c some value
+     * @return the smaller of (a,b) and c
+     */
     private static int min(int a, int b, int c) {
         return Math.min(Math.min(a,b) ,c);
     }
 
+    /**
+     * This method appends a string of tokens
+     * @param words sentence in an array
+     * @param startPos first element in the array
+     * @param endPos last element in the array
+     * @return the appended words
+     */
     private static String append(String[] words, int startPos, int endPos) {
         StringBuilder stringBuilder = new StringBuilder();
         for(int i = startPos; i < endPos; i++) {

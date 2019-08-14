@@ -1,12 +1,6 @@
-import sun.jvm.hotspot.ui.treetable.AbstractTreeTableModel;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 
-// need to make editDistance and nGran : public in fuzzyMatch.java to run this code!!
+// need to make editDistance and nGram : public in fuzzyMatch.java to run this code!!
 
 public class positionScoreBetweenStrings extends fuzzyMatch {
     public static void main(String[] args) {
