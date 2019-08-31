@@ -1,5 +1,5 @@
 # fuzzyMatching 
-using Levenshtein Edit Distance and Sørensen Dice Coefficient
+using Levenshtein Edit Distance and Sørensen Dice Coefficient and Jaccard Index
 #
 #### Instructions
 - Create a method that takes in two strings
